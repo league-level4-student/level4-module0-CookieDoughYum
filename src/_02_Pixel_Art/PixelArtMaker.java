@@ -3,6 +3,7 @@ package _02_Pixel_Art;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 
 import javax.swing.JFrame;
 
@@ -61,5 +62,16 @@ public class PixelArtMaker implements MouseListener{
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+	}
+	
+	public boolean SaveState(){
+		try {
+			
+		return true;	
+		}
+		catch(Exception e) {
+			return false;
+		}
+		
 	}
 }

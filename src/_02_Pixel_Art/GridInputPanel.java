@@ -13,6 +13,7 @@ public class GridInputPanel extends JPanel{
 	private JTextField rowsField;
 	private JTextField colsField;
 	private JButton submitButton;
+	private JButton saveButton;
 			
 	PixelArtMaker pam;
 	
@@ -24,6 +25,7 @@ public class GridInputPanel extends JPanel{
 		rowsField = new JTextField(5);
 		colsField = new JTextField(5);
 		submitButton = new JButton("Submit");
+		saveButton=new JButton("save");
 		
 		add(new JLabel("screen width:"));
 		add(windowWidthField);
@@ -34,8 +36,9 @@ public class GridInputPanel extends JPanel{
 		add(new JLabel("\ttotal columns:"));
 		add(colsField);
 		add(submitButton);
-		
+		add(saveButton);
 		submitButton.addActionListener((e)->submit());
+		saveButton.addActionListener((e)->save());
 	}
 	
 	private void submit() {
@@ -63,7 +66,9 @@ public class GridInputPanel extends JPanel{
 			pam.submitGridData(w, h, r, c);
 		}
 	}
-	
+	private void save() {
+		
+	}
 	private void invalidateInput() {
 		JOptionPane.showMessageDialog(null, "Be sure all fields are complete with positive numbers.", "ERROR", 0);
 	}
