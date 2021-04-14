@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.util.Hashtable;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,6 +32,8 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 	
 	private JLabel colorLabel;
 	private BufferedImage colorImage;
+	
+	private JButton saveButton;
 	
 	public ColorSelectionPanel() {
 		rSlider = new JSlider(JSlider.VERTICAL);
@@ -61,7 +64,8 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 				colorImage.setRGB(j, i, color.getRGB());
 			}
 		}
-		
+		saveButton=new JButton("Save");
+		saveButton.addActionListener((e)->GridInputPanel.save(PixelArtMaker.gp));
 		colorLabel.setIcon(new ImageIcon(colorImage));
 		add(colorLabel);
 		
@@ -71,6 +75,7 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 		add(gSlider);
 		add(new JLabel("blue"));
 		add(bSlider);
+		add(saveButton);
 	}
 
 	public Color getSelectedColor() {

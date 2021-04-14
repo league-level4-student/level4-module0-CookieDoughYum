@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 public class PixelArtMaker implements MouseListener{
 	private JFrame window;
 	private GridInputPanel gip;
-	private GridPanel gp;
+	public static GridPanel gp;
 	ColorSelectionPanel csp;
 	
 	public void start() {
