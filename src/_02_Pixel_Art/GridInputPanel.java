@@ -24,11 +24,12 @@ public class GridInputPanel extends JPanel{
 	private JTextField rowsField;
 	private JTextField colsField;
 	private JButton submitButton;
+	private JButton loadImage;
 	
 			
 	PixelArtMaker pam;
 	
-	private static final String DATA_FILE = "src/_02_Pixel_Art/SaveState.java";
+	private static final String DATA_FILE = "src/_02_Pixel_Art/SaveState.dat";
 	
 	public GridInputPanel(PixelArtMaker pam) {
 		this.pam = pam;
@@ -38,6 +39,7 @@ public class GridInputPanel extends JPanel{
 		rowsField = new JTextField(5);
 		colsField = new JTextField(5);
 		submitButton = new JButton("Submit");
+		loadImage=new JButton("Load Image");
 		
 		add(new JLabel("screen width:"));
 		add(windowWidthField);
@@ -48,7 +50,9 @@ public class GridInputPanel extends JPanel{
 		add(new JLabel("\ttotal columns:"));
 		add(colsField);
 		add(submitButton);
+		add(loadImage);
 		submitButton.addActionListener((e)->submit());
+		loadImage.addActionListener((e)->pam.loaded());
 		
 	}
 	
@@ -80,18 +84,20 @@ public class GridInputPanel extends JPanel{
 	public void test() {
 		GridPanel g=PixelArtMaker.gp;
 		save(g);
-		GridPanel loadedData = load();
+		
 //display loadedData on the grid
 	}
 	public static void save(GridPanel data) {
 		try (FileOutputStream fos = new FileOutputStream(new File(DATA_FILE)); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			oos.writeObject(data);
+			//System.out.println(DATA_FILE);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	public static GridPanel load() {
 		try (FileInputStream fis = new FileInputStream(new File(DATA_FILE)); ObjectInputStream ois = new ObjectInputStream(fis)) {
+			System.out.println(DATA_FILE);
 			return (GridPanel) ois.readObject();
 		} catch (IOException e) {
 			e.printStackTrace();

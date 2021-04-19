@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class PixelArtMaker implements MouseListener{
@@ -12,6 +13,8 @@ public class PixelArtMaker implements MouseListener{
 	private GridInputPanel gip;
 	public static GridPanel gp;
 	ColorSelectionPanel csp;
+	GridPanel loadedData = GridInputPanel.load();
+	JButton loadImage=new JButton("Load Image");
 	
 	public void start() {
 		gip = new GridInputPanel(this);	
@@ -28,6 +31,7 @@ public class PixelArtMaker implements MouseListener{
 	public void submitGridData(int w, int h, int r, int c) {
 		gp = new GridPanel(w, h, r, c);
 		csp = new ColorSelectionPanel();
+		loadImage.addActionListener((e)->loaded());
 		window.remove(gip);
 		window.add(gp);
 		window.add(csp);
@@ -73,5 +77,17 @@ public class PixelArtMaker implements MouseListener{
 			return false;
 		}
 		
+	}
+	
+	public void loaded() {
+		window.add(loadedData);
+		gp=loadedData;
+		csp = new ColorSelectionPanel();
+		window.remove(gip);
+		//window.add(gp);
+		window.add(csp);
+		gp.repaint();
+		gp.addMouseListener(this);
+		window.pack();
 	}
 }
